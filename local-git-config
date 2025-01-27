@@ -1,0 +1,147 @@
+[user]
+	name = telilab
+	email = bosenatelila@gmail.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	# Use nano as default editor
+	editor = nano
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned
+	precomposeunicode = false
+	# Avoid problems with line endings
+	autocrlf = input
+	# Large file optimization
+	preloadindex = true
+	# Improve performance
+	fscache = true
+
+[color]
+	# Use colors in Git commands output
+	ui = true
+
+[pull]
+	# Rebase by default when pulling
+	rebase = true
+
+[fetch]
+	# Remove remote branches that no longer exist
+	prune = true
+	# Also prune tags
+	pruneTags = true
+
+[push]
+	# Push only the current branch
+	default = current
+	# Push tags automatically
+	followTags = true
+
+[rebase]
+	# Automatically stash/unstash changes when rebasing
+	autoStash = true
+	# Auto squash fixup commits
+	autoSquash = true
+
+[diff]
+	# Better diffs
+	algorithm = patience
+	# Detect copies as well as renames
+	renames = copies
+	# Use VSCode as diff tool
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge]
+	# Show merge conflicts in a better way
+	conflictstyle = diff3
+	# Use VSCode as merge tool
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+
+[alias]
+	# Basic shortcuts
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	dc = diff --cached
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+	# Branch management
+	cb = checkout -b
+	bd = branch -d
+	bD = branch -D
+
+	# Rebase shortcuts
+	rb = rebase
+	rbi = rebase -i
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbs = rebase --skip
+	
+	# Remote rebase shortcuts
+	rbm = !git fetch origin main:main && git rebase main
+	rbom = !git fetch origin main && git rebase origin/main
+	
+	# Commit fixups
+	fixup = !sh -c 'git commit --fixup=$1' -
+	
+	# Update from upstream
+	up = !git pull --rebase --prune
+	
+	# Clean up local branches
+	cleanup = !git branch --merged | grep -v \"\\*\" | grep -v main | xargs -n 1 git branch -d
+	
+	# Show changes in last commit
+	last = show HEAD^..HEAD
+	
+	# List all aliases
+	alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+	
+	# Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
+	
+	# Stash shortcuts
+	save = stash push
+	pop = stash pop
+	
+	# Show verbose output about tags, branches, or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+	
+	# List contributors with number of commits
+	contributors = shortlog --summary --numbered
+	
+	# Find commits by commit message
+	find = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+[credential]
+	# Cache credentials
+	helper = cache --timeout=3600
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
+[url "git@github.com:"]
+	# Use SSH instead of HTTPS for GitHub
+	insteadOf = https://github.com/
+
+[branch]
+	# Auto setup remote tracking
+	autoSetupRemote = true
+
+[status]
+	# Show short status by default
+	short = true
+	# Show branch info
+	branch = true
+	# Show untracked files
+	showUntrackedFiles = all
