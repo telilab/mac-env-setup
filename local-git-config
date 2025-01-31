@@ -130,9 +130,9 @@
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
 
-[url "git@github.com:"]
+[url "ssh://git@ssh.github.com:443/"]
 	# Use SSH instead of HTTPS for GitHub
-	insteadOf = https://github.com/
+	insteadOf = git@github.com
 
 [branch]
 	# Auto setup remote tracking
